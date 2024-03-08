@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "サンプル";
+}
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <div class="row">
+        <h3>① 電卓</h3>
+    </div>
+    <div class="row">
+        <h3>② JSON形式のオープンデータを活用した検索</h3>
+        <form>
+            <div class="form-group">
+                <label for="isbn">ISBN番号</label>
+                <input type="text" class="form-control" id="isbn">
+            </div>
+            <button type="submit" class="btn btn-primary" id="isbnSearch">検索</button>
+            <p>id：<span id="span1"></span></p>
+        </form>
+    </div>
+    <div class="row">
+        <h3>③ サーバ側</h3>
+    </div>
+</main>
+@section scripts{
+    <script type="text/javascript">
+        // 送信ボタンがクリックされたときの処理
+        $('#isbnSearch').click(function () {
+            alert("isbnSearch");
+
+            //// 入力されたISBN番号を取得
+            //var isbn = $('#isbn').val();
+            //// WebAPIのURL
+            //var url = 'https://api.openbd.jp/v1/get?isbn=' + isbn;
+
+            // WebAPIにアクセス
+            $.ajax({
+                url: 'https://api.openbd.jp/v1/get?isbn=978-4-7741-9690-9',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // result2に取得したデータを表示
+                    //$("#span1").text("good");
+                    alert("good");
+                },
+                error: function (data) {
+                    //$("#span1").text("bad");
+                    alert("bad");
+                }
+            });
+        });
+
+    </script>
+}
